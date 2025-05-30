@@ -1,0 +1,112 @@
+// Copyright 2025 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_shared {
+    name: "libcupsfilters",
+
+    visibility: [
+        "//vendor:__subpackages__",
+        "//external/libppd",
+    ],
+    rtti: true,
+
+    cflags: [
+        "-fexceptions",
+        "-DHAVE_LIBCUPS2",
+        "-Wno-implicit-fallthrough",
+        "-Wno-non-virtual-dtor",
+        "-Wno-ignored-qualifiers",
+        "-Wno-unused-parameter",
+        "-Wno-deprecated-declarations",
+        "-Wno-mismatched-tags",
+    ],
+
+    // Put the config.h file in a private dir so it doesn't get exported.
+    local_include_dirs: [
+        "private",
+    ],
+
+    srcs: [
+        // Use libcupsfilters_la_SOURCES from libcupsfilters Makefile
+        "cupsfilters/bannertopdf.c",
+        "cupsfilters/bitmap.c",
+        "cupsfilters/catalog.c",
+        "cupsfilters/check.c",
+        "cupsfilters/cmyk.c",
+        "cupsfilters/colord.c",
+        "cupsfilters/colormanager.c",
+        "cupsfilters/debug.c",
+        "cupsfilters/dither.c",
+        "cupsfilters/filter.c",
+        "cupsfilters/fontembed/aglfn13.c",
+        "cupsfilters/fontembed/dynstring.c",
+        "cupsfilters/fontembed/embed.c",
+        "cupsfilters/fontembed/embed-sfnt.c",
+        "cupsfilters/fontembed/embed-pdf.c",
+        "cupsfilters/fontembed/fontfile.c",
+        "cupsfilters/fontembed/frequent.c",
+        "cupsfilters/fontembed/sfnt.c",
+        "cupsfilters/fontembed/sfnt-subset.c",
+        "cupsfilters/ghostscript.c",
+        "cupsfilters/ieee1284.c",
+        "cupsfilters/image.c",
+        "cupsfilters/image-colorspace.c",
+        "cupsfilters/image-jpeg.c",
+        "cupsfilters/image-png.c",
+        "cupsfilters/image-tiff.c",
+        "cupsfilters/image-zoom.c",
+        "cupsfilters/imagetopdf.c",
+        "cupsfilters/imagetoraster.c",
+        "cupsfilters/ipp.c",
+        "cupsfilters/libcups2.c",
+        "cupsfilters/lut.c",
+        "cupsfilters/mupdftopwg.c",
+        "cupsfilters/pack.c",
+        "cupsfilters/pclmtoraster.cxx",
+        "cupsfilters/pdf.cxx",
+        "cupsfilters/pdftopdf/pdftopdf.cxx",
+        "cupsfilters/pdftopdf/pdftopdf-processor.cxx",
+        "cupsfilters/pdftopdf/qpdf-pdftopdf-processor.cxx",
+        "cupsfilters/pdftopdf/pptypes.cxx",
+        "cupsfilters/pdftopdf/nup.cxx",
+        "cupsfilters/pdftopdf/intervalset.cxx",
+        "cupsfilters/pdftopdf/qpdf-tools.cxx",
+        "cupsfilters/pdftopdf/qpdf-xobject.cxx",
+        "cupsfilters/pdftopdf/qpdf-pdftopdf.cxx",
+        "cupsfilters/pdftopdf/qpdf-cm.cxx",
+        "cupsfilters/pdftoraster.cxx",
+        "cupsfilters/pdfutils.c",
+        "cupsfilters/pwgtopdf.cxx",
+        "cupsfilters/pwgtoraster.c",
+        "cupsfilters/raster.c",
+        "cupsfilters/rastertopwg.c",
+        "cupsfilters/rgb.c",
+        "cupsfilters/srgb.c",
+        "cupsfilters/texttotext.c",
+        "cupsfilters/texttopdf.c",
+        "cupsfilters/universal.c",
+    ],
+
+    export_include_dirs: [
+        ".",
+    ],
+
+    shared_libs: [
+        "libcups",
+        "liblcms2",
+        "libqpdf",
+        "libjpeg",
+        "libpng",
+    ],
+}
